@@ -32,7 +32,7 @@ class TaskManager:
     def mark_task(self):
         self.display()
         if not self.stack:
-            print("> No tasks available to mark as completed.")
+            print("> No tasks available.")
             return
 
         mark_task = int(input("> Which task would you like to mark as completed? ")) - 1
@@ -46,9 +46,13 @@ class TaskManager:
 
     def display(self):
         print("─── ⋆⋅☆⋅⋆ ───Your Current Tasks─── ⋆⋅☆⋅⋆ ───")
-        for taskList, task in enumerate(self.stack, start=1):
-            status = "Completed" if task["Status"] else "Incomplete"
-            print(f"{taskList}. Title: {task['Title']}\n  Description: {task['Description']}\n  Status: {status}")
+        if not self.stack:
+            print("> There are currently no tasks")
+
+        else:
+            for taskList, task in enumerate(self.stack, start=1):
+                status = "Completed" if task["Status"] else "Incomplete"
+                print(f"{taskList}. Title: {task['Title']}\n  Description: {task['Description']}\n  Status: {status}")
 
     def use(self):
         question = input("> Do you want to use the Task Manager again? ")
