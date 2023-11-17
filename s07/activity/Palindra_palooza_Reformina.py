@@ -3,6 +3,10 @@ class Node:
         self.data = data
         self.next = None
 
+def is_alphanumeric(char):
+    # checks if the character is an alphanumeric character
+    return 'a' <= char <= 'z' or 'A' <= char <= 'Z' or '0' <= char <= '9'
+
 class Stack:
     def __init__(self):
         self.top = None
@@ -13,7 +17,7 @@ class Stack:
             self.option = int(input("Palindrome Checker = 1 | Exit = 2\nWhat would you like to do?: "))
 
             if self.option == 1:
-                # asks user to input a sentence
+                # asks the user to input a sentence
                 user_input = input("Enter a sentence: ")
 
                 self.top = None
@@ -42,17 +46,13 @@ class Stack:
 
         if self.top is None:
             self.top = new_node
-
         else:
             new_node.next = self.top
             self.top = new_node
 
     def checker(self, data):
         # compares the sentence you wrote from the reverse sentence
-        check = ""
-        for char in data:
-            if char.isalpha():
-                check += char.lower()
+        check = "".join(char.lower() for char in data if is_alphanumeric(char))
         return check
 
     def is_palindrome(self, data):
